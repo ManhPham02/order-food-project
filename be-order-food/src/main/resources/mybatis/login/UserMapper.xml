@@ -1,0 +1,28 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="order.food.login.mapper.LoginMapper">
+    <select id="getUserLogin" resultType="order.food.login.response.UserReponseDto">
+        select
+            username,
+            password
+        from
+            `user` u
+        <where>
+            u.username like #{userReq.username}
+            and u.password like #{userReq.password}
+        </where>
+    </select>
+
+    <select id="getRoleByUsername" resultType="String">
+        SELECT
+            R.name
+        FROM
+            `user` U
+            LEFT JOIN author A ON U.ID = A.USERID
+            LEFT JOIN `role` R ON A.ROLEID = R.ID
+        WHERE
+            U.USERNAME like #{username}
+    </select>
+
+</mapper>
